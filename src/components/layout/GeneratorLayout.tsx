@@ -21,17 +21,14 @@ export function GeneratorLayout() {
   const previewPanelRef = useRef<HTMLDivElement>(null);
   const [previewScale, setPreviewScale] = useState(0.3);
 
-  // Compute preview scale from panel width
   useEffect(() => {
     const el = previewPanelRef.current;
     if (!el) return;
-
     const update = () => {
-      const panelWidth = el.clientWidth - 48; // account for padding
+      const panelWidth = el.clientWidth - 64;
       const { width } = getCardSize(gen.state.sizePreset);
       setPreviewScale(Math.min(1, panelWidth / width));
     };
-
     update();
     const observer = new ResizeObserver(update);
     observer.observe(el);
@@ -50,15 +47,15 @@ export function GeneratorLayout() {
   };
 
   return (
-    <section id="generator" className="bg-zinc-950 min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 py-10">
-        <div className="flex flex-col lg:grid lg:grid-cols-[480px_1fr] gap-8 items-start">
+    <section id="generator" className="min-h-screen bg-[#0a0a0a]">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10">
+        <div className="flex flex-col lg:flex-row gap-0 min-h-screen">
 
-          {/* ─── Left: Controls ─── */}
-          <div className="w-full space-y-8">
+          {/* ─── Left panel: Controls ─── */}
+          <div className="w-full lg:w-[420px] lg:flex-shrink-0 lg:border-r border-white/[0.06] lg:pr-8 py-10">
 
-            {/* App Picker */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
+            {/* App selection */}
+            <div className="mb-8">
               <AppPicker
                 isAppSelected={gen.isAppSelected}
                 isAtLimit={gen.isAtLimit}
@@ -69,9 +66,9 @@ export function GeneratorLayout() {
               />
             </div>
 
-            {/* Selected Apps + Time */}
+            {/* Time sliders */}
             {gen.state.selectedApps.length > 0 && (
-              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
+              <div className="mb-8 pt-8 border-t border-white/[0.06]">
                 <SelectedAppsList
                   apps={gen.state.selectedApps}
                   totalMinutes={gen.totalMinutes}
@@ -82,7 +79,7 @@ export function GeneratorLayout() {
             )}
 
             {/* Period */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
+            <div className="mb-8 pt-8 border-t border-white/[0.06]">
               <PeriodSelector
                 selected={gen.state.period}
                 customLabel={gen.state.customPeriodLabel}
@@ -92,15 +89,15 @@ export function GeneratorLayout() {
             </div>
 
             {/* Theme */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
+            <div className="mb-8 pt-8 border-t border-white/[0.06]">
               <ThemeSelector
                 selected={gen.state.theme}
                 onSelect={gen.setTheme}
               />
             </div>
 
-            {/* Size preset */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
+            {/* Format */}
+            <div className="mb-8 pt-8 border-t border-white/[0.06]">
               <SizePresetSelector
                 selected={gen.state.sizePreset}
                 onSelect={gen.setSizePreset}
@@ -108,7 +105,7 @@ export function GeneratorLayout() {
             </div>
 
             {/* Export */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
+            <div className="pt-8 border-t border-white/[0.06]">
               <ExportActions
                 sizePreset={gen.state.sizePreset}
                 status={exp.status}
@@ -119,50 +116,62 @@ export function GeneratorLayout() {
                 hasApps={gen.state.selectedApps.length > 0}
               />
             </div>
+
           </div>
 
-          {/* ─── Right: Preview ─── */}
+          {/* ─── Right panel: Preview ─── */}
           <div
             ref={previewPanelRef}
-            className="w-full lg:sticky lg:top-6"
+            className="flex-1 lg:pl-10 py-10 lg:sticky lg:top-0 lg:self-start lg:h-screen flex flex-col"
           >
-            <div className="flex items-center justify-between mb-3 px-1">
-              <span className="text-sm font-semibold text-zinc-400 uppercase tracking-wider">
-                Preview
-              </span>
-              <span className="text-xs text-zinc-600">
-                {width} × {height}
-              </span>
+            <div className="flex items-center justify-between mb-5">
+              <p className="text-sm font-medium text-white/30">Preview</p>
+              <p className="text-xs text-white/20">{width} × {height}</p>
             </div>
 
-            {/* Preview container — clips to preview size */}
-            <div
-              className="relative overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-800"
-              style={{ height: `${previewHeight + 48}px`, padding: "24px" }}
-            >
-              {/* Scale wrapper */}
+            {/* Preview frame */}
+            <div className="flex-1 flex items-center justify-center min-h-0">
               <div
-                style={{
-                  transformOrigin: "top left",
-                  transform: `scale(${previewScale})`,
-                  width: `${width}px`,
-                  height: `${height}px`,
-                }}
+                className="relative"
+                style={{ width: `${width * previewScale}px`, height: `${previewHeight}px` }}
               >
-                {/* Actual full-res card — this is what gets exported */}
-                <ScreenCard ref={exp.cardRef} state={gen.state} />
+                {/* Subtle shadow behind card */}
+                <div
+                  className="absolute inset-0 rounded-2xl"
+                  style={{
+                    boxShadow: "0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04)",
+                  }}
+                />
+                {/* Actual card */}
+                <div
+                  style={{
+                    transformOrigin: "top left",
+                    transform: `scale(${previewScale})`,
+                    width: `${width}px`,
+                    height: `${height}px`,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    borderRadius: "16px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <ScreenCard ref={exp.cardRef} state={gen.state} />
+                </div>
               </div>
             </div>
 
-            {/* Preview hint */}
-            <p className="mt-2 text-center text-xs text-zinc-700">
-              This is exactly what you&apos;ll get when you export
-            </p>
+            {/* Hint */}
+            {gen.state.selectedApps.length === 0 && (
+              <p className="text-center text-xs text-white/20 mt-5">
+                Select apps from the left to start building
+              </p>
+            )}
           </div>
+
         </div>
       </div>
 
-      {/* Custom app modal */}
       {showCustomModal && (
         <CustomAppModal
           onAdd={gen.addCustomApp}

@@ -17,26 +17,16 @@ export function SelectedAppsList({
   onSetMinutes,
   onRemove,
 }: SelectedAppsListProps) {
-  if (apps.length === 0) {
-    return (
-      <div className="py-8 text-center text-zinc-600 text-sm">
-        Select apps above to start building your card
-      </div>
-    );
-  }
-
   return (
     <div>
-      <div className="flex items-center justify-between mb-3">
-        <h2 className="text-sm font-semibold text-zinc-300 uppercase tracking-wider">
-          Usage Time
-        </h2>
-        <span className="text-sm font-bold text-violet-400">
-          Total: {minutesToDisplay(totalMinutes)}
+      <div className="flex items-baseline justify-between mb-4">
+        <h2 className="text-base font-semibold text-white">Usage Time</h2>
+        <span className="text-sm font-semibold text-white/60 tabular-nums">
+          {minutesToDisplay(totalMinutes)}
         </span>
       </div>
 
-      <div className="divide-y divide-zinc-800/50">
+      <div className="divide-y divide-white/[0.04]">
         {apps.map((app) => (
           <TimeSlider
             key={app.id}

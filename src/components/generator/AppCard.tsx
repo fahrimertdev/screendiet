@@ -15,25 +15,41 @@ export function AppCard({ app, isSelected, isDisabled, onToggle }: AppCardProps)
       onClick={onToggle}
       disabled={isDisabled && !isSelected}
       title={isDisabled && !isSelected ? "Remove an app to add another" : app.name}
-      className={`relative flex flex-col items-center gap-1.5 p-3 rounded-xl border transition-all text-center ${
+      className={`relative group flex flex-col items-center gap-2 p-3 rounded-xl transition-all duration-150 ${
         isSelected
-          ? "border-violet-500 bg-violet-950/50"
+          ? "bg-white/10 ring-1 ring-white/20"
           : isDisabled
-          ? "border-zinc-800 bg-zinc-900/30 opacity-40 cursor-not-allowed"
-          : "border-zinc-800 bg-zinc-900/50 hover:border-zinc-600 hover:bg-zinc-800/50"
+          ? "opacity-25 cursor-not-allowed"
+          : "hover:bg-white/[0.06] active:bg-white/[0.09]"
       }`}
     >
+      {/* Icon bubble */}
+      <div
+        className="w-10 h-10 rounded-xl flex items-center justify-center text-xl transition-transform group-hover:scale-105"
+        style={{
+          backgroundColor: isSelected ? `${app.color}33` : `${app.color}18`,
+        }}
+      >
+        {app.icon}
+      </div>
+
+      <span className={`text-[11px] font-medium leading-tight text-center line-clamp-1 w-full ${
+        isSelected ? "text-white" : "text-white/50"
+      }`}>
+        {app.name}
+      </span>
+
+      {/* Selected indicator */}
       {isSelected && (
-        <div className="absolute top-1.5 right-1.5 w-4 h-4 bg-violet-500 rounded-full flex items-center justify-center">
-          <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-            <path d="M1 4L3 6L7 2" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <div
+          className="absolute top-1.5 right-1.5 w-3.5 h-3.5 rounded-full flex items-center justify-center"
+          style={{ backgroundColor: app.color }}
+        >
+          <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
+            <path d="M1 3.5L2.8 5.5L6 2" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
       )}
-      <span className="text-2xl">{app.icon}</span>
-      <span className="text-xs font-medium text-zinc-300 leading-tight line-clamp-2">
-        {app.name}
-      </span>
     </button>
   );
 }

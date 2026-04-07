@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "ScreenDiet — Turn your screen time into art",
@@ -24,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className="min-h-full bg-zinc-950 text-zinc-100">{children}</body>
+    <html lang="en" className={`h-full ${spaceGrotesk.variable}`}>
+      <body className="min-h-full bg-[#0a0a0a] text-white antialiased">{children}</body>
     </html>
   );
 }

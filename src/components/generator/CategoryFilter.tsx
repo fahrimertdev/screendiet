@@ -9,15 +9,15 @@ interface CategoryFilterProps {
 
 export function CategoryFilter({ selected, onSelect }: CategoryFilterProps) {
   return (
-    <div className="flex flex-wrap gap-2 mb-4">
+    <div className="flex gap-1 overflow-x-auto pb-1 no-scrollbar">
       {CATEGORIES.map((cat) => (
         <button
           key={cat.id}
           onClick={() => onSelect(cat.id)}
-          className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
+          className={`flex-shrink-0 px-3 py-1 rounded-full text-xs font-medium transition-all ${
             selected === cat.id
-              ? "bg-violet-600 text-white"
-              : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-200"
+              ? "bg-white text-black"
+              : "text-white/40 hover:text-white/70"
           }`}
         >
           {cat.label}

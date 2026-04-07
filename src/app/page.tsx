@@ -8,16 +8,11 @@ export default function Home() {
       <GeneratorLayout />
 
       {/* Footer */}
-      <footer className="border-t border-zinc-900 bg-zinc-950 py-6 text-center">
-        <p className="text-sm text-zinc-700">
-          Made with ♥ by{" "}
-          <a
-            href="https://screendiet.app"
-            className="text-zinc-500 hover:text-zinc-300 transition-colors"
-          >
-            ScreenDiet
-          </a>
-        </p>
+      <footer className="border-t border-white/[0.06] py-8 px-6 md:px-10">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <span className="text-sm font-semibold text-white/20">ScreenDiet</span>
+          <span className="text-xs text-white/15">screendiet.app</span>
+        </div>
       </footer>
     </main>
   );
