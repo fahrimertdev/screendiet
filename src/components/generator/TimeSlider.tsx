@@ -1,7 +1,7 @@
 "use client";
 
 import { SelectedApp } from "@/types";
-import { minutesToDisplay } from "@/lib/timeFormatters";
+import { minutesToDisplay, getInitials, ensureVisibleColor } from "@/lib/timeFormatters";
 
 interface TimeSliderProps {
   app: SelectedApp;
@@ -13,16 +13,18 @@ export function TimeSlider({ app, onChangeMinutes, onRemove }: TimeSliderProps) 
   const MAX_MINUTES = 720;
   const STEP = 15;
   const pct = (app.minutes / MAX_MINUTES) * 100;
+  const initials = getInitials(app.name);
+  const visibleColor = ensureVisibleColor(app.color);
 
   return (
     <div className="group py-3">
       <div className="flex items-center gap-3 mb-2">
         {/* Icon */}
         <div
-          className="w-7 h-7 rounded-lg flex items-center justify-center text-sm flex-shrink-0"
-          style={{ backgroundColor: `${app.color}20` }}
+          className="w-7 h-7 rounded-lg flex items-center justify-center text-[10px] font-bold flex-shrink-0"
+          style={{ backgroundColor: `${app.color}20`, color: visibleColor }}
         >
-          {app.icon}
+          {initials}
         </div>
 
         {/* Name */}

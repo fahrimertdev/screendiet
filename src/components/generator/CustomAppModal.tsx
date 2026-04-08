@@ -27,7 +27,7 @@ export function CustomAppModal({ onAdd, onClose }: CustomAppModalProps) {
     onAdd({
       id,
       name: name.trim(),
-      icon: initials,
+      icon: "",
       color,
       category: "other",
       minutes: 30,

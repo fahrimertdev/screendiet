@@ -9,7 +9,7 @@ interface CategoryFilterProps {
 
 export function CategoryFilter({ selected, onSelect }: CategoryFilterProps) {
   return (
-    <div className="flex gap-1 overflow-x-auto pb-1 no-scrollbar">
+    <div className="flex flex-wrap gap-1">
       {CATEGORIES.map((cat) => (
         <button
           key={cat.id}

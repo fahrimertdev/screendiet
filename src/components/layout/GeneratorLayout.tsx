@@ -25,9 +25,12 @@ export function GeneratorLayout() {
     const el = previewPanelRef.current;
     if (!el) return;
     const update = () => {
-      const panelWidth = el.clientWidth - 64;
-      const { width } = getCardSize(gen.state.sizePreset);
-      setPreviewScale(Math.min(1, panelWidth / width));
+      const panelWidth = el.clientWidth - 48;
+      const panelHeight = el.clientHeight - 100; // subtract header/footer space
+      const { width, height } = getCardSize(gen.state.sizePreset);
+      const scaleByWidth = panelWidth / width;
+      const scaleByHeight = panelHeight / height;
+      setPreviewScale(Math.min(1, scaleByWidth, scaleByHeight));
     };
     update();
     const observer = new ResizeObserver(update);
@@ -49,10 +52,10 @@ export function GeneratorLayout() {
   return (
     <section id="generator" className="min-h-screen bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-10">
-        <div className="flex flex-col lg:flex-row gap-0 min-h-screen">
+        <div className="flex flex-col lg:flex-row gap-0 min-h-screen lg:items-start">
 
           {/* ─── Left panel: Controls ─── */}
-          <div className="w-full lg:w-[420px] lg:flex-shrink-0 lg:border-r border-white/[0.06] lg:pr-8 py-10">
+          <div className="w-full lg:w-[440px] lg:flex-shrink-0 lg:border-r border-white/[0.06] lg:pr-10 py-10">
 
             {/* App selection */}
             <div className="mb-8">
@@ -122,7 +125,8 @@ export function GeneratorLayout() {
           {/* ─── Right panel: Preview ─── */}
           <div
             ref={previewPanelRef}
-            className="flex-1 lg:pl-10 py-10 lg:sticky lg:top-0 lg:self-start lg:h-screen flex flex-col"
+            className="flex-1 lg:pl-10 py-10 lg:sticky lg:top-0 lg:self-start flex flex-col"
+            style={{ maxHeight: "100vh" }}
           >
             <div className="flex items-center justify-between mb-5">
               <p className="text-sm font-medium text-white/30">Preview</p>
@@ -130,7 +134,7 @@ export function GeneratorLayout() {
             </div>
 
             {/* Preview frame */}
-            <div className="flex-1 flex items-center justify-center min-h-0">
+            <div className="flex-1 flex items-center justify-center min-h-0 overflow-hidden">
               <div
                 className="relative"
                 style={{ width: `${width * previewScale}px`, height: `${previewHeight}px` }}
