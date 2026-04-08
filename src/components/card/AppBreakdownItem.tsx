@@ -1,5 +1,5 @@
 import { SelectedApp, ThemeConfig } from "@/types";
-import { minutesToDisplay, percentOf } from "@/lib/timeFormatters";
+import { minutesToDisplay, percentOf, getInitials } from "@/lib/timeFormatters";
 
 interface AppBreakdownItemProps {
   app: SelectedApp;
@@ -11,6 +11,7 @@ interface AppBreakdownItemProps {
 export function AppBreakdownItem({ app, totalMinutes, theme, rank }: AppBreakdownItemProps) {
   const pct = percentOf(app.minutes, totalMinutes);
   const duration = minutesToDisplay(app.minutes);
+  const initials = getInitials(app.name);
 
   return (
     <div
@@ -24,33 +25,38 @@ export function AppBreakdownItem({ app, totalMinutes, theme, rank }: AppBreakdow
       {/* Rank */}
       <div
         style={{
-          width: "20px",
-          fontSize: "12px",
+          width: "18px",
+          fontSize: "11px",
           color: theme.secondaryText,
           fontFamily: "system-ui, -apple-system, sans-serif",
           fontWeight: 600,
           textAlign: "right",
           flexShrink: 0,
+          opacity: 0.5,
         }}
       >
         {rank}
       </div>
 
-      {/* Icon */}
+      {/* Initials icon */}
       <div
         style={{
           width: "36px",
           height: "36px",
           borderRadius: "10px",
-          backgroundColor: `${app.color}22`,
+          backgroundColor: `${app.color}25`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: "20px",
+          fontSize: "12px",
+          fontWeight: 700,
+          color: app.color,
+          fontFamily: "system-ui, -apple-system, sans-serif",
+          letterSpacing: "-0.01em",
           flexShrink: 0,
         }}
       >
-        {app.icon}
+        {initials}
       </div>
 
       {/* Name + bar */}
@@ -78,7 +84,7 @@ export function AppBreakdownItem({ app, totalMinutes, theme, rank }: AppBreakdow
           </span>
           <span
             style={{
-              fontSize: "13px",
+              fontSize: "12px",
               fontWeight: 600,
               color: theme.secondaryText,
               fontFamily: "system-ui, -apple-system, sans-serif",
@@ -93,8 +99,8 @@ export function AppBreakdownItem({ app, totalMinutes, theme, rank }: AppBreakdow
         {/* Progress bar */}
         <div
           style={{
-            height: "6px",
-            borderRadius: "3px",
+            height: "4px",
+            borderRadius: "2px",
             backgroundColor: theme.barBackground,
             overflow: "hidden",
           }}
@@ -103,7 +109,7 @@ export function AppBreakdownItem({ app, totalMinutes, theme, rank }: AppBreakdow
             style={{
               height: "100%",
               width: `${pct}%`,
-              borderRadius: "3px",
+              borderRadius: "2px",
               backgroundColor: app.color,
             }}
           />
@@ -113,13 +119,14 @@ export function AppBreakdownItem({ app, totalMinutes, theme, rank }: AppBreakdow
       {/* Percentage */}
       <div
         style={{
-          width: "36px",
-          fontSize: "12px",
+          width: "32px",
+          fontSize: "11px",
           color: theme.secondaryText,
           fontFamily: "system-ui, -apple-system, sans-serif",
           fontWeight: 600,
           textAlign: "right",
           flexShrink: 0,
+          opacity: 0.7,
         }}
       >
         {pct}%

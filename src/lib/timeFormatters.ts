@@ -37,3 +37,11 @@ export function periodLabel(period: PeriodOption, custom?: string): string {
 export function normalizeMinutes(value: number): number {
   return Math.max(0, Math.min(720, Math.round(value / 15) * 15));
 }
+
+export function getInitials(name: string): string {
+  const words = name.replace(/[^a-zA-Z\s]/g, " ").trim().split(/\s+/).filter(Boolean);
+  if (words.length >= 2) {
+    return (words[0][0] + words[1][0]).toUpperCase();
+  }
+  return name.replace(/[^a-zA-Z]/g, "").slice(0, 2).toUpperCase();
+}

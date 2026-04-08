@@ -1,6 +1,7 @@
 "use client";
 
 import { AppDefinition } from "@/types";
+import { getInitials } from "@/lib/timeFormatters";
 
 interface AppCardProps {
   app: AppDefinition;
@@ -10,6 +11,8 @@ interface AppCardProps {
 }
 
 export function AppCard({ app, isSelected, isDisabled, onToggle }: AppCardProps) {
+  const initials = getInitials(app.name);
+
   return (
     <button
       onClick={onToggle}
@@ -23,14 +26,15 @@ export function AppCard({ app, isSelected, isDisabled, onToggle }: AppCardProps)
           : "hover:bg-white/[0.06] active:bg-white/[0.09]"
       }`}
     >
-      {/* Icon bubble */}
+      {/* Initials bubble */}
       <div
-        className="w-10 h-10 rounded-xl flex items-center justify-center text-xl transition-transform group-hover:scale-105"
+        className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm leading-none transition-transform group-hover:scale-105 flex-shrink-0"
         style={{
-          backgroundColor: isSelected ? `${app.color}33` : `${app.color}18`,
+          backgroundColor: isSelected ? `${app.color}40` : `${app.color}20`,
+          color: app.color,
         }}
       >
-        {app.icon}
+        {initials}
       </div>
 
       <span className={`text-[11px] font-medium leading-tight text-center line-clamp-1 w-full ${
@@ -39,16 +43,12 @@ export function AppCard({ app, isSelected, isDisabled, onToggle }: AppCardProps)
         {app.name}
       </span>
 
-      {/* Selected indicator */}
+      {/* Selected dot */}
       {isSelected && (
         <div
-          className="absolute top-1.5 right-1.5 w-3.5 h-3.5 rounded-full flex items-center justify-center"
+          className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full"
           style={{ backgroundColor: app.color }}
-        >
-          <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
-            <path d="M1 3.5L2.8 5.5L6 2" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
+        />
       )}
     </button>
   );

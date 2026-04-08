@@ -148,13 +148,34 @@ export const ScreenCard = forwardRef<HTMLDivElement, ScreenCardProps>(
               gap: "12px",
             }}
           >
-            <div style={{ fontSize: "48px" }}>📱</div>
             <div
               style={{
-                fontSize: "16px",
+                width: "48px",
+                height: "48px",
+                borderRadius: "14px",
+                backgroundColor: `${theme.accent}18`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  borderRadius: "4px",
+                  backgroundColor: theme.accent,
+                  opacity: 0.5,
+                }}
+              />
+            </div>
+            <div
+              style={{
+                fontSize: "15px",
                 color: theme.secondaryText,
                 textAlign: "center",
                 lineHeight: 1.5,
+                opacity: 0.6,
               }}
             >
               Add apps to see your breakdown

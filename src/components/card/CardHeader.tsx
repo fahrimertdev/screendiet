@@ -18,29 +18,41 @@ export function CardHeader({ theme, period, customPeriodLabel }: CardHeaderProps
         marginBottom: "4px",
       }}
     >
-      {/* Brand */}
+      {/* Brand mark */}
       <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        {/* Geometric SD mark */}
         <div
           style={{
-            width: "28px",
-            height: "28px",
-            borderRadius: "8px",
+            width: "24px",
+            height: "24px",
+            borderRadius: "6px",
             backgroundColor: theme.accent,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "16px",
           }}
         >
-          📱
+          <span
+            style={{
+              fontSize: "9px",
+              fontWeight: 800,
+              color: theme.background,
+              fontFamily: "system-ui, -apple-system, sans-serif",
+              letterSpacing: "-0.02em",
+              lineHeight: 1,
+            }}
+          >
+            SD
+          </span>
         </div>
         <span
           style={{
-            fontSize: "15px",
+            fontSize: "14px",
             fontWeight: 700,
             color: theme.primaryText,
             fontFamily: "system-ui, -apple-system, sans-serif",
             letterSpacing: "-0.02em",
+            opacity: 0.85,
           }}
         >
           ScreenDiet
@@ -50,19 +62,18 @@ export function CardHeader({ theme, period, customPeriodLabel }: CardHeaderProps
       {/* Period label */}
       <div
         style={{
-          backgroundColor: `${theme.accent}22`,
-          border: `1px solid ${theme.accent}44`,
+          backgroundColor: `${theme.accent}18`,
           borderRadius: "100px",
-          padding: "4px 12px",
+          padding: "4px 10px",
         }}
       >
         <span
           style={{
-            fontSize: "13px",
+            fontSize: "12px",
             fontWeight: 600,
             color: theme.accent,
             fontFamily: "system-ui, -apple-system, sans-serif",
-            letterSpacing: "0.02em",
+            letterSpacing: "0.01em",
           }}
         >
           {periodLabel(period, customPeriodLabel)}
