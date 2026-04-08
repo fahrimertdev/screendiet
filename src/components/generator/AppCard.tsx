@@ -1,7 +1,7 @@
 "use client";
 
 import { AppDefinition } from "@/types";
-import { getInitials } from "@/lib/timeFormatters";
+import { getInitials, ensureVisibleColor } from "@/lib/timeFormatters";
 
 interface AppCardProps {
   app: AppDefinition;
@@ -12,6 +12,7 @@ interface AppCardProps {
 
 export function AppCard({ app, isSelected, isDisabled, onToggle }: AppCardProps) {
   const initials = getInitials(app.name);
+  const visibleColor = ensureVisibleColor(app.color);
 
   return (
     <button
@@ -31,7 +32,7 @@ export function AppCard({ app, isSelected, isDisabled, onToggle }: AppCardProps)
         className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm leading-none transition-transform group-hover:scale-105 flex-shrink-0"
         style={{
           backgroundColor: isSelected ? `${app.color}40` : `${app.color}20`,
-          color: app.color,
+          color: visibleColor,
         }}
       >
         {initials}

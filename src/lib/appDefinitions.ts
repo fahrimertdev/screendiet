@@ -3,15 +3,15 @@ import { AppDefinition } from "@/types";
 export const APP_DEFINITIONS: AppDefinition[] = [
   // Social
   { id: "instagram", name: "Instagram", icon: "📸", color: "#E1306C", category: "social" },
-  { id: "tiktok", name: "TikTok", icon: "🎵", color: "#010101", category: "social" },
+  { id: "tiktok", name: "TikTok", icon: "🎵", color: "#FE2C55", category: "social" },
   { id: "twitter", name: "Twitter / X", icon: "🐦", color: "#1DA1F2", category: "social" },
   { id: "snapchat", name: "Snapchat", icon: "👻", color: "#FFFC00", category: "social" },
   { id: "facebook", name: "Facebook", icon: "📘", color: "#1877F2", category: "social" },
   { id: "reddit", name: "Reddit", icon: "🤖", color: "#FF4500", category: "social" },
   { id: "linkedin", name: "LinkedIn", icon: "💼", color: "#0A66C2", category: "social" },
   { id: "pinterest", name: "Pinterest", icon: "📌", color: "#E60023", category: "social" },
-  { id: "threads", name: "Threads", icon: "🧵", color: "#000000", category: "social" },
-  { id: "bereal", name: "BeReal", icon: "📷", color: "#000000", category: "social" },
+  { id: "threads", name: "Threads", icon: "🧵", color: "#666666", category: "social" },
+  { id: "bereal", name: "BeReal", icon: "📷", color: "#3D3D3D", category: "social" },
 
   // Video
   { id: "youtube", name: "YouTube", icon: "▶️", color: "#FF0000", category: "video" },
@@ -41,8 +41,8 @@ export const APP_DEFINITIONS: AppDefinition[] = [
   { id: "gmail", name: "Gmail", icon: "📧", color: "#EA4335", category: "productivity" },
   { id: "chrome", name: "Chrome", icon: "🌐", color: "#4285F4", category: "productivity" },
   { id: "safari", name: "Safari", icon: "🧭", color: "#006CFF", category: "productivity" },
-  { id: "notion", name: "Notion", icon: "📝", color: "#000000", category: "productivity" },
-  { id: "slack", name: "Slack", icon: "💬", color: "#4A154B", category: "productivity" },
+  { id: "notion", name: "Notion", icon: "📝", color: "#888888", category: "productivity" },
+  { id: "slack", name: "Slack", icon: "💬", color: "#E01E5A", category: "productivity" },
   { id: "zoom", name: "Zoom", icon: "📹", color: "#2D8CFF", category: "productivity" },
 
   // Music

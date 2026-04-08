@@ -1,5 +1,5 @@
 import { SelectedApp, ThemeConfig } from "@/types";
-import { minutesToDisplay, percentOf, getInitials } from "@/lib/timeFormatters";
+import { minutesToDisplay, percentOf, getInitials, ensureVisibleColor } from "@/lib/timeFormatters";
 
 interface AppBreakdownItemProps {
   app: SelectedApp;
@@ -12,6 +12,7 @@ export function AppBreakdownItem({ app, totalMinutes, theme, rank }: AppBreakdow
   const pct = percentOf(app.minutes, totalMinutes);
   const duration = minutesToDisplay(app.minutes);
   const initials = getInitials(app.name);
+  const visibleColor = ensureVisibleColor(app.color);
 
   return (
     <div
@@ -50,7 +51,7 @@ export function AppBreakdownItem({ app, totalMinutes, theme, rank }: AppBreakdow
           justifyContent: "center",
           fontSize: "12px",
           fontWeight: 700,
-          color: app.color,
+          color: visibleColor,
           fontFamily: "system-ui, -apple-system, sans-serif",
           letterSpacing: "-0.01em",
           flexShrink: 0,
