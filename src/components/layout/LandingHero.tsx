@@ -63,7 +63,7 @@ export function LandingHero() {
           </div>
 
           {/* Right — Card previews */}
-          <div className="lg:w-[420px] flex-shrink-0 flex items-end gap-3 select-none pointer-events-none">
+          <div className="hidden lg:flex lg:w-[420px] flex-shrink-0 items-end gap-3 select-none pointer-events-none">
             {/* Card 1 — Midnight */}
             <div
               className="flex-1 rounded-2xl overflow-hidden"

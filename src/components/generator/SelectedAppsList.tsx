@@ -31,6 +31,7 @@ export function SelectedAppsList({
           <TimeSlider
             key={app.id}
             app={app}
+            totalMinutes={totalMinutes}
             onChangeMinutes={(m) => onSetMinutes(app.id, m)}
             onRemove={() => onRemove(app.id)}
           />

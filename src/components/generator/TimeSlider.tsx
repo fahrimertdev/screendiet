@@ -1,18 +1,20 @@
 "use client";
 
 import { SelectedApp } from "@/types";
-import { minutesToDisplay, getInitials, ensureVisibleColor } from "@/lib/timeFormatters";
+import { minutesToDisplay, percentOf, getInitials, ensureVisibleColor } from "@/lib/timeFormatters";
 
 interface TimeSliderProps {
   app: SelectedApp;
+  totalMinutes: number;
   onChangeMinutes: (minutes: number) => void;
   onRemove: () => void;
 }
 
-export function TimeSlider({ app, onChangeMinutes, onRemove }: TimeSliderProps) {
+export function TimeSlider({ app, totalMinutes, onChangeMinutes, onRemove }: TimeSliderProps) {
   const MAX_MINUTES = 720;
   const STEP = 15;
   const pct = (app.minutes / MAX_MINUTES) * 100;
+  const sharePct = percentOf(app.minutes, totalMinutes);
   const initials = getInitials(app.name);
   const visibleColor = ensureVisibleColor(app.color);
 
@@ -32,10 +34,15 @@ export function TimeSlider({ app, onChangeMinutes, onRemove }: TimeSliderProps) 
           {app.name}
         </span>
 
-        {/* Duration */}
+        {/* Duration + share % */}
         <span className="text-sm font-semibold text-white tabular-nums flex-shrink-0">
           {minutesToDisplay(app.minutes)}
         </span>
+        {totalMinutes > 0 && (
+          <span className="text-xs text-white/30 tabular-nums flex-shrink-0 w-8 text-right">
+            {sharePct}%
+          </span>
+        )}
 
         {/* Remove */}
         <button
